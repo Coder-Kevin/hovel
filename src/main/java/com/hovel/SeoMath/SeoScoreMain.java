@@ -1,5 +1,6 @@
 package com.hovel.SeoMath;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,21 +9,21 @@ public class SeoScoreMain {
         Map params = new HashMap();
 
         params.put("word","组合床");
-        params.put("clickRateParam",0.2339);
-        params.put("clickCountParam",586);
-        params.put("conversionRateParam",0.1092);
-        params.put("conversionCountParam",64);
+        params.put("clickRateParam",new BigDecimal(0.2339));
+        params.put("clickCountParam",new BigDecimal(586));
+        params.put("conversionRateParam",new BigDecimal(0.1092));
+        params.put("conversionCountParam",new BigDecimal(64));
         //TODO 参数待补充
-//        params.put("guarantee","组合床");
-//        params.put("refundRate","组合床");
-//        params.put("averageClickRate","组合床");
-//        params.put("averageclickCount","组合床");
-//        params.put("averageConversionRate","组合床");
-//        params.put("averageConversionCount","组合床");
-        params.put("ratio",5.20);
+        params.put("guarantee",true);
+        params.put("refundRate",new BigDecimal(0.2));
+        params.put("averageClickRate",new BigDecimal(1.2));
+        params.put("averageclickCount",new BigDecimal(1.2));
+        params.put("averageConversionRate",new BigDecimal(1.2));
+        params.put("averageConversionCount",new BigDecimal(1.2));
+        params.put("ratio",new BigDecimal(5.20));
 
         RankingScore rankingScore = new RankingScore();
-        double value = rankingScore.getSEORankScore(rankingScore.getKeywordsScore(params),rankingScore.getCommodityPerforScore(params));
+        BigDecimal value = rankingScore.getSEORankScore(rankingScore.getKeywordsScore(params),rankingScore.getCommodityPerforScore(params));
         System.out.println("关键词："+params.get("word")+"，SEO商品排名得分:"+value);
     }
 }

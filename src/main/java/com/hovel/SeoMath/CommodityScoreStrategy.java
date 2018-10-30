@@ -1,5 +1,7 @@
 package com.hovel.SeoMath;
 
+import java.math.BigDecimal;
+
 public interface CommodityScoreStrategy {
     /**
      *
@@ -7,5 +9,5 @@ public interface CommodityScoreStrategy {
      * @param average 平均值
      * @return 得分
      */
-    double compute(double param, double average);
+    BigDecimal compute(BigDecimal param, BigDecimal average);
 }
