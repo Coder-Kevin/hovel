@@ -24,6 +24,7 @@ public class SeoScoreMain {
 
         RankingScore rankingScore = new RankingScore();
         BigDecimal value = rankingScore.getSEORankScore(rankingScore.getKeywordsScore(params),rankingScore.getCommodityPerforScore(params));
-        System.out.println("关键词："+params.get("word")+"，SEO商品排名得分:"+value);
+        value.setScale(6,BigDecimal.ROUND_HALF_UP);
+        System.out.println("关键词："+params.get("word")+"，SEO商品排名得分:"+value.setScale(6,BigDecimal.ROUND_HALF_UP));
     }
 }

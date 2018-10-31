@@ -13,7 +13,7 @@ public class ClickRateStrategy implements CommodityScoreStrategy {
     public BigDecimal compute(BigDecimal param, BigDecimal average) {
         if(param.compareTo(average) >= 0)
             return new BigDecimal(20);
-        BigDecimal result = param.divide(average);
+        BigDecimal result = param.divide(average,4);
         return result.multiply(new BigDecimal(20));
     }
 }
