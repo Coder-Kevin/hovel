@@ -2,6 +2,9 @@ package com.hovel.SeoMath;
 
 import java.math.BigDecimal;
 
+/**
+ * 商品绩效得分接口
+ */
 public interface CommodityScoreStrategy {
     /**
      *
