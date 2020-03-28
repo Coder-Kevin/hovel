@@ -1,9 +1,12 @@
-package com.hovel.base.thread;
+package com.hovel.base.thread.singleton;
+
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * 饿汉式单例模式
  * 利用静态代码块来解决
  */
+@ThreadSafe
 public class SingletonDemo5 {
 
     private SingletonDemo5() {}

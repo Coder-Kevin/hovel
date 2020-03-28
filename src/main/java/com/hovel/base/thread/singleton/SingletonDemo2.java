@@ -1,9 +1,12 @@
-package com.hovel.base.thread;
+package com.hovel.base.thread.singleton;
+
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * 懒汉式单例模式
  * 线程安全的，比起饿汉式性能资源上更有优势。
  */
+@ThreadSafe
 public class SingletonDemo2 {
 
     private SingletonDemo2() {}

@@ -1,6 +1,7 @@
 package com.hovel.base.thread;
 
 import lombok.extern.slf4j.Slf4j;
+import net.jcip.annotations.NotThreadSafe;
 
 import java.util.Arrays;
 
@@ -8,6 +9,7 @@ import java.util.Arrays;
  * 发布不安全的对象  细品，就是不安全的域，导致可以修改
  */
 @Slf4j
+@NotThreadSafe
 public class UnsafePublish {
     private String[] states = {"a","b","c"};
 

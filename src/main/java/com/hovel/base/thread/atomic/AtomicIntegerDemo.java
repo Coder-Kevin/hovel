@@ -1,4 +1,4 @@
-package com.hovel.base.thread;
+package com.hovel.base.thread.atomic;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

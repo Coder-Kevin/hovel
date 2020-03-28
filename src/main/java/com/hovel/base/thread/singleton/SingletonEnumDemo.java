@@ -1,5 +1,8 @@
-package com.hovel.base.thread;
+package com.hovel.base.thread.singleton;
 
+import net.jcip.annotations.ThreadSafe;
+
+@ThreadSafe
 public class SingletonEnumDemo {
     private SingletonEnumDemo() {}
 
