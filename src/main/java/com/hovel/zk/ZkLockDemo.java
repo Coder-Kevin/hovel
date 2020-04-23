@@ -1,4 +1,4 @@
-package com.hovel.zk.lock;
+package com.hovel.zk;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -29,6 +29,8 @@ public class ZkLockDemo {
 
         t1.start();
         t2.start();
+
+//        client.close();
     }
 
     private static void doWithLock(CuratorFramework client) {
