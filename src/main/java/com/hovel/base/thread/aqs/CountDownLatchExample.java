@@ -13,6 +13,9 @@ public class CountDownLatchExample {
 
 
     public static void main(String[] args) throws Exception{
+        /**
+         * CountDownLatch 阻塞某一线程（例如此案例中的mian线程）直到其他线程（CountDownLatch所含数量的）全部完成
+         */
         final CountDownLatch countDownLatch = new CountDownLatch(threadNum);
 
         ExecutorService service = Executors.newCachedThreadPool();
@@ -34,11 +37,11 @@ public class CountDownLatchExample {
         }
         // await阻塞countdown=0为止
         countDownLatch.await();
-        log.info("finish");
+        log.info(Thread.currentThread().getName() + " finish");
         service.shutdown();
     }
 
     public static void test(int num){
-        log.info("test-{}", num);
+        log.info("{}-{}", Thread.currentThread().getName(), num);
     }
 }

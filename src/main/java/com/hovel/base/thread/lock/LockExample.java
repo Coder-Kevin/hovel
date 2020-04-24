@@ -1,5 +1,6 @@
 package com.hovel.base.thread.lock;
 
+import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.ThreadSafe;
 
 import java.util.concurrent.CountDownLatch;
@@ -10,6 +11,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 @ThreadSafe
+@Slf4j
 public class LockExample {
 
     // 请求总数
@@ -20,7 +22,7 @@ public class LockExample {
 
     public static int count = 0;
 
-    private static Lock lock = new ReentrantLock();
+    private static ReentrantLock lock = new ReentrantLock();
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -55,6 +57,7 @@ public class LockExample {
         lock.lock();
         try {
             count++;
+            log.info("{} : {}", Thread.currentThread().getName(), count);
         } finally {
             lock.unlock();
         }
