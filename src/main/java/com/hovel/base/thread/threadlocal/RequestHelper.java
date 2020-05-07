@@ -1,4 +1,4 @@
-package com.hovel.threadlocal;
+package com.hovel.base.thread.threadlocal;
 
 public class RequestHelper {
 

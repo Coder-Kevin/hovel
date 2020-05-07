@@ -1,4 +1,4 @@
-package com.hovel.threadlocal;
+package com.hovel.base.thread.threadlocal;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;

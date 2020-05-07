@@ -1,6 +1,6 @@
 package com.hovel;
 
-import com.hovel.threadlocal.HttpInterceptor;
+import com.hovel.base.thread.threadlocal.HttpInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;

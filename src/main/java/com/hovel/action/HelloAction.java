@@ -1,14 +1,11 @@
 package com.hovel.action;
 
-import com.hovel.threadlocal.RequestHelper;
-import lombok.Data;
+import com.hovel.base.thread.threadlocal.RequestHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 
 @Controller

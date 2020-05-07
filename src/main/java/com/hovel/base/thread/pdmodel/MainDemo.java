@@ -1,24 +1,28 @@
 package com.hovel.base.thread.pdmodel;
 
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class MainDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ComputerStore computerStore = new ComputerStore();
-        while (computerStore.full()) {
-            System.out.println("开始抢购");
-            new Thread(new Consumer(computerStore)).start();
-        }
+
 
 
         for (int i=0;i<10;i++){
             new Thread(new Producer(computerStore)).start();
         }
 
+        Thread.sleep(1000);
 
+        ExecutorService executorService = Executors.newFixedThreadPool(30);
 
-//        for (int i=0;i<6;i++){
-//            new Thread(new Consumer(computerStore)).start();
-//        }
+        while (computerStore.hasProduct()) {
+            executorService.submit(new Consumer(computerStore));
+        }
+
+        executorService.shutdown();
 
     }
 }
