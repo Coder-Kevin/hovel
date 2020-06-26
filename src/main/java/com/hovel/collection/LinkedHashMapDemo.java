@@ -10,9 +10,9 @@ public class LinkedHashMapDemo {
     public static void main(String[] args) {
         LinkedHashMap<String, Object> data = new LinkedHashMap<>();
         data.put("A", "Hello");
-        data.put("B","World");
-        data.put("C","Kevin");
-        data.put("D","Job");
+        data.put("B", "World");
+        data.put("C", "Kevin");
+        data.put("D", "Job");
 
         data.put("A", "HelloA");
         System.out.println(data);

@@ -60,7 +60,7 @@ public class ReadWriteLockExample {
 
     }
 
-    public Set<String> getAllKeys () {
+    public Set<String> getAllKeys() {
         readLock.lock();
         try {
             return dataMap.keySet();

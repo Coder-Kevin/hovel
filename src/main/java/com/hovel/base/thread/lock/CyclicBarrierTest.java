@@ -8,7 +8,7 @@ public class CyclicBarrierTest {
     private static CyclicBarrier cBarrier = null;
 
     public static void main(String[] args) {
-        cBarrier = new CyclicBarrier(5,new Runnable() {
+        cBarrier = new CyclicBarrier(5, new Runnable() {
 
             @Override
             public void run() {
@@ -16,7 +16,7 @@ public class CyclicBarrierTest {
             }
         });
 
-        for(int i=0;i<5;i++){
+        for (int i = 0; i < 5; i++) {
             Thread party = new PartiesThread();
             party.start();
 //            if(i == 4){
@@ -25,9 +25,9 @@ public class CyclicBarrierTest {
         }
     }
 
-    static class PartiesThread extends Thread{
-        public void run(){
-            System.out.println(Thread.currentThread().getName()+"到了会议室");
+    static class PartiesThread extends Thread {
+        public void run() {
+            System.out.println(Thread.currentThread().getName() + "到了会议室");
             try {
                 cBarrier.await();
 

@@ -24,6 +24,6 @@ public class ThreadStateDemo {
                 break;
             }
 
-        }while (true);
+        } while (true);
     }
 }

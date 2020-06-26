@@ -29,9 +29,10 @@ public class ComputerStore {
             System.out.println("生产者" + Thread.currentThread().getName() + " release lock");
         }
     }
+
     @SneakyThrows
     public void consume() {
-        synchronized(lock) {
+        synchronized (lock) {
             System.out.println("消费者" + Thread.currentThread().getName() + " get lock");
             while (!hasProduct()) {
                 lock.wait();
@@ -49,11 +50,11 @@ public class ComputerStore {
         }
     }
 
-    public boolean full(){
+    public boolean full() {
         return count.intValue() == 100;
     }
 
-    public boolean hasProduct(){
+    public boolean hasProduct() {
         return count.intValue() > 0;
     }
 

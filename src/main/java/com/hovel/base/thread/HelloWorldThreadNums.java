@@ -2,7 +2,7 @@ package com.hovel.base.thread;
 
 /**
  * 执行一个main线程，jvm会启动多少线程
- *
+ * <p>
  * Reference Handler 是否是守护线程：true
  * Finalizer 是否是守护线程：true
  * Signal Dispatcher 是否是守护线程：true

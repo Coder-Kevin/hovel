@@ -88,7 +88,8 @@ public class ElementalPoolingHttpGet {
                 }
             }
 
-        };
+        }
+        ;
 
         WorkerThread[] workers = new WorkerThread[targets.length];
         for (int i = 0; i < workers.length; i++) {

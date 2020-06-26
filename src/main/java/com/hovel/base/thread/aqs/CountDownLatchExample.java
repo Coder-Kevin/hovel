@@ -12,7 +12,7 @@ public class CountDownLatchExample {
     public final static int threadNum = 100;
 
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         /**
          * CountDownLatch 阻塞某一线程（例如此案例中的mian线程）直到其他线程（CountDownLatch所含数量的）全部完成
          */
@@ -41,7 +41,7 @@ public class CountDownLatchExample {
         service.shutdown();
     }
 
-    public static void test(int num){
+    public static void test(int num) {
         log.info("{}-{}", Thread.currentThread().getName(), num);
     }
 }

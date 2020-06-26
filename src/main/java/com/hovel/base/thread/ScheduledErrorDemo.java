@@ -11,13 +11,13 @@ public class ScheduledErrorDemo {
 
     private static int count = 0;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         scheduledExecutorService.scheduleAtFixedRate(() -> {
-            count ++;
+            count++;
             System.out.println(count + "--->" + new Date());
-            if(count == 3){
+            if (count == 3) {
                 throw new RuntimeException("任务出错了");
             }
-        },2000,5000, TimeUnit.MILLISECONDS);
+        }, 2000, 5000, TimeUnit.MILLISECONDS);
     }
 }

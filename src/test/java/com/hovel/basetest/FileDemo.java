@@ -12,7 +12,7 @@ public class FileDemo {
      * 字节流uft-8转ISO-8859-1
      */
     @Test
-    public void fileCharsetConvert(){
+    public void fileCharsetConvert() {
         InputStream in = null;
         OutputStream out = null;
         try {

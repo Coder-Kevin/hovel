@@ -8,7 +8,7 @@ public class UserRequest {
     private static ExecutorService executorService = Executors.newFixedThreadPool(200);
 
     public static void main(String[] args) {
-        for (int i=0;i<200; i++) {
+        for (int i = 0; i < 200; i++) {
             executorService.submit(new UserTask());
         }
 

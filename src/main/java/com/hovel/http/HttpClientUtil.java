@@ -14,14 +14,15 @@ import java.util.concurrent.Future;
 
 public class HttpClientUtil {
 
-    private HttpClientUtil(){}
+    private HttpClientUtil() {
+    }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         String result = get("http://localhost:8046/user/Kevin");
         System.out.println(result);
     }
 
-    public static String get(String url){
+    public static String get(String url) {
         CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault();
         try {
             httpclient.start();

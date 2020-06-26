@@ -14,7 +14,7 @@ public class MaxLengthSubStringDemo {
         int i = 0, j = 0;
 
         while (i < str.length() && j < str.length()) {
-            System.out.println("j:" + j + " :" + str.charAt(j) +"-" + (int)str.charAt(j) + "--" + hash[str.charAt(j)]);
+            System.out.println("j:" + j + " :" + str.charAt(j) + "-" + (int) str.charAt(j) + "--" + hash[str.charAt(j)]);
             if (hash[str.charAt(j)] == 0) {
                 hash[str.charAt(j)] = 1;
                 j++;
@@ -29,7 +29,7 @@ public class MaxLengthSubStringDemo {
     }
 
 
-    public static String maxSubString(String str){
+    public static String maxSubString(String str) {
 
 
         return "";

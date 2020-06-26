@@ -27,10 +27,10 @@ public class VolatileDemo {
         System.out.println("--Spring容器初始化完成，初始化完成关闭当前线程--");
     }
 
-    static class SpringRunTask implements Runnable{
+    static class SpringRunTask implements Runnable {
         private SpringContainer springContainer;
 
-        SpringRunTask (SpringContainer springContainer) {
+        SpringRunTask(SpringContainer springContainer) {
             this.springContainer = springContainer;
         }
 

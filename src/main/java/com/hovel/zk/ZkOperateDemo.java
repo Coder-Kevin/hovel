@@ -23,7 +23,7 @@ public class ZkOperateDemo {
         log.info("/locks state is {}", stat);
 
 
-        if(stat == null){
+        if (stat == null) {
             client.create().forPath("/locks/lock_01");
         }
 

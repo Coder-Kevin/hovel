@@ -22,7 +22,7 @@ public class SimpleDateFormatExample2 {
         final Semaphore semaphore = new Semaphore(threadTotal);
         final CountDownLatch countDownLatch = new CountDownLatch(requestTotal);
 
-        for (int i=0;i<requestTotal;i++) {
+        for (int i = 0; i < requestTotal; i++) {
             executorService.execute(() -> {
                 try {
                     semaphore.acquire();

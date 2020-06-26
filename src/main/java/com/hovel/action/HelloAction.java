@@ -13,7 +13,7 @@ public class HelloAction {
 
     @RequestMapping("/hi")
     @ResponseBody
-    public String hello(){
+    public String hello() {
 
         System.out.println("------" + RequestHelper.get());
         return "helli";
@@ -21,7 +21,7 @@ public class HelloAction {
 
     @GetMapping("/test/array")
     @ResponseBody
-    public Object testArray(@RequestBody Param param){
+    public Object testArray(@RequestBody Param param) {
 
         System.out.println(param);
 
@@ -30,7 +30,7 @@ public class HelloAction {
 
     @GetMapping("/test/array0")
     @ResponseBody
-    public Object testArray0(@RequestBody Param param){
+    public Object testArray0(@RequestBody Param param) {
 
         System.out.println(param);
 

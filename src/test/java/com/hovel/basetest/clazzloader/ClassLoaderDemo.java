@@ -6,7 +6,7 @@ import org.springframework.util.ClassUtils;
 public class ClassLoaderDemo {
 
     @Test
-    public void test(){
+    public void test() {
         ClassLoader classLoader = ClassUtils.getDefaultClassLoader();
 
         System.out.println(classLoader.equals(Thread.currentThread().getContextClassLoader()));

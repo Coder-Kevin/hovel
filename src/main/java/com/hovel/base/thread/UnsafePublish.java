@@ -11,7 +11,7 @@ import java.util.Arrays;
 @Slf4j
 @NotThreadSafe
 public class UnsafePublish {
-    private String[] states = {"a","b","c"};
+    private String[] states = {"a", "b", "c"};
 
     public String[] getStates() {
         return states;
@@ -24,7 +24,7 @@ public class UnsafePublish {
 
         unsafePublish.getStates()[0] = "f";
 
-        log.info("{}",Arrays.toString(unsafePublish.getStates()));
+        log.info("{}", Arrays.toString(unsafePublish.getStates()));
     }
 
 }

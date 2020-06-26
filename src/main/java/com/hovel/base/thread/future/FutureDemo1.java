@@ -61,7 +61,7 @@ public class FutureDemo1 {
 
         @Override
         public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-            ((FutureTask)r).cancel(true);
+            ((FutureTask) r).cancel(true);
         }
     }
 }

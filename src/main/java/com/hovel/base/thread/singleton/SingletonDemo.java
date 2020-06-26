@@ -9,7 +9,8 @@ import net.jcip.annotations.ThreadSafe;
 @ThreadSafe
 public class SingletonDemo {
 
-    private SingletonDemo () {}
+    private SingletonDemo() {
+    }
 
     private static SingletonDemo singletonDemo = new SingletonDemo();
 

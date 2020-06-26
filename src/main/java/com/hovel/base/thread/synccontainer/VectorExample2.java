@@ -13,14 +13,14 @@ public class VectorExample2 {
 
     public static void main(String[] args) {
 
-        for (int i=0;i<5;i++) {
+        for (int i = 0; i < 5; i++) {
             list.add(i);
         }
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i=0;i<5;i++) {
+                for (int i = 0; i < 5; i++) {
                     list.remove(i); // get恰好已被remove移除就会异常
                 }
             }
@@ -29,7 +29,7 @@ public class VectorExample2 {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i=0;i<5;i++) {
+                for (int i = 0; i < 5; i++) {
                     list.get(i);
                 }
             }

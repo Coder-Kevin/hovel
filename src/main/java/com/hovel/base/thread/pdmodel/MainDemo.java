@@ -9,8 +9,7 @@ public class MainDemo {
         ComputerStore computerStore = new ComputerStore();
 
 
-
-        for (int i=0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
             new Thread(new Producer(computerStore)).start();
         }
 

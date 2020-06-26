@@ -9,7 +9,8 @@ import net.jcip.annotations.NotThreadSafe;
 @NotThreadSafe
 public class SingletonDemo1 {
 
-    private SingletonDemo1() {}
+    private SingletonDemo1() {
+    }
 
     private static SingletonDemo1 singletonDemo = null;
 
@@ -18,7 +19,7 @@ public class SingletonDemo1 {
          * 线程不安全出现在下面的if代码块
          * Thread_A 和 Thread_B同时到达if的时候，就会出现两个对象实例。
          */
-        if(null == singletonDemo){
+        if (null == singletonDemo) {
             singletonDemo = new SingletonDemo1();
         }
         return singletonDemo;

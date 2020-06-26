@@ -85,7 +85,7 @@ public class RedisDemo {
     public void multiNotSafe() {
         Jedis anotherJedis = new Jedis();
 
-        jedis.set("mu","hello");
+        jedis.set("mu", "hello");
         Transaction transaction = jedis.multi();
         transaction.append("mu", "1");
         anotherJedis.append("mu", "hu");

@@ -8,7 +8,7 @@ import java.util.concurrent.*;
 
 /**
  * 对应TreeMap的有序并发容器
- *
+ * <p>
  * 据说是跳表实现   需要研究下
  */
 @ThreadSafe
@@ -28,7 +28,7 @@ public class ConcurrentSkipListMapExample {
         final Semaphore semaphore = new Semaphore(threadTotal);
         final CountDownLatch countDownLatch = new CountDownLatch(requestTotal);
 
-        for (int i=0;i<requestTotal;i++) {
+        for (int i = 0; i < requestTotal; i++) {
             final int num = i;
             executorService.execute(() -> {
                 try {
@@ -54,7 +54,7 @@ public class ConcurrentSkipListMapExample {
     }
 
     private static void add(int i) {
-        map.put(i,i);
+        map.put(i, i);
     }
 
 }

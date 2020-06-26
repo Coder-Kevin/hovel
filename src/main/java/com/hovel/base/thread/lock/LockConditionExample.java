@@ -31,7 +31,7 @@ public class LockConditionExample {
                     condition.await(); // 调用此方法，线程会从AQS的队列里移除
                     log.info("get single"); // 4
                 } catch (Exception e) {
-                    log.error("异常",e);
+                    log.error("异常", e);
                 } finally {
                     lock.unlock();
                 }
@@ -49,7 +49,7 @@ public class LockConditionExample {
                     condition.signalAll();
                     log.info("send single"); // 3
                 } catch (Exception e) {
-                    log.error("异常",e);
+                    log.error("异常", e);
                 } finally {
                     lock.unlock();
                 }

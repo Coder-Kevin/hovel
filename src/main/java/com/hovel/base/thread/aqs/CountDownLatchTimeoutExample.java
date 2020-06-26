@@ -12,7 +12,7 @@ public class CountDownLatchTimeoutExample {
 
     public final static int threadNum = 100;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         final CountDownLatch countDownLatch = new CountDownLatch(threadNum);
 
         ExecutorService service = Executors.newCachedThreadPool();

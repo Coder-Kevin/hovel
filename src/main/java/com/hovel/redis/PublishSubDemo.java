@@ -14,7 +14,7 @@ public class PublishSubDemo {
         String publishChannel = "mytopic";
 
         Jedis jedis = new Jedis();
-        jedis.publish(publishChannel,"Hello");
+        jedis.publish(publishChannel, "Hello");
 
 //        JedisPubSub jedisPubSub = new JedisSentinelPool(jedis);
 //        jedis.subscribe();

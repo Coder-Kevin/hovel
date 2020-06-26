@@ -9,18 +9,20 @@ import net.jcip.annotations.ThreadSafe;
 @ThreadSafe
 public class SingletonDemo2 {
 
-    private SingletonDemo2() {}
+    private SingletonDemo2() {
+    }
 
     private static SingletonDemo2 singletonDemo = null;
 
     /**
      * synchronized 只会让一个线程进入创建对象实例。但是
-     *  会造成性能问题。
+     * 会造成性能问题。
+     *
      * @return
      */
     public synchronized static SingletonDemo2 getInstance() {
 
-        if(null == singletonDemo){
+        if (null == singletonDemo) {
             singletonDemo = new SingletonDemo2();
         }
         return singletonDemo;

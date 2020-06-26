@@ -6,7 +6,7 @@ public class RedisLock extends AbstractDistributeLock {
 
     private Jedis jedis;
 
-    public RedisLock(Jedis jedis){
+    public RedisLock(Jedis jedis) {
         this.jedis = jedis;
     }
 
@@ -25,7 +25,7 @@ public class RedisLock extends AbstractDistributeLock {
 
     @Override
     boolean unlockByRedis(String key) {
-        if(jedis.del(key) == 1) {
+        if (jedis.del(key) == 1) {
             return true;
         }
 

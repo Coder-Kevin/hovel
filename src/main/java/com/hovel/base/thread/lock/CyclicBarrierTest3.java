@@ -16,7 +16,7 @@ public class CyclicBarrierTest3 {
             }
         });
 
-        for(int i=0;i<3;i++){
+        for (int i = 0; i < 3; i++) {
             Thread party = new PartiesThread();
             party.start();
             if (i == 2) {
@@ -32,7 +32,7 @@ public class CyclicBarrierTest3 {
 
         cBarrier.reset();
 
-        for(int i=0;i<3;i++){
+        for (int i = 0; i < 3; i++) {
             Thread party = new PartiesThread();
             party.start();
         }
@@ -42,14 +42,14 @@ public class CyclicBarrierTest3 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+
         System.out.println("正式开会...");
     }
 
-    static class PartiesThread extends Thread{
+    static class PartiesThread extends Thread {
         @SneakyThrows
-        public void run(){
-            System.out.println(Thread.currentThread().getName()+"到了会议室");
+        public void run() {
+            System.out.println(Thread.currentThread().getName() + "到了会议室");
             cBarrier.await();
             System.out.println(Thread.currentThread().getName() + "找到座位");
             cBarrier.await();

@@ -27,7 +27,7 @@ public class HashtableExample {
         final Semaphore semaphore = new Semaphore(threadTotal);
         final CountDownLatch countDownLatch = new CountDownLatch(requestTotal);
 
-        for (int i=0;i<requestTotal;i++) {
+        for (int i = 0; i < requestTotal; i++) {
             final int num = i;
             executorService.execute(() -> {
                 try {
@@ -54,7 +54,7 @@ public class HashtableExample {
     }
 
     private static void add(int i) {
-        map.put(i,i);
+        map.put(i, i);
     }
 
 }

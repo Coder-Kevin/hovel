@@ -27,7 +27,7 @@ public class VectorExample {
         final Semaphore semaphore = new Semaphore(threadTotal);
         final CountDownLatch countDownLatch = new CountDownLatch(requestTotal);
 
-        for (int i=0;i<requestTotal;i++) {
+        for (int i = 0; i < requestTotal; i++) {
             final int num = i;
             executorService.execute(() -> {
                 try {
