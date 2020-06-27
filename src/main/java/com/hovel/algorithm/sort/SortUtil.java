@@ -1,4 +1,4 @@
-package com.hovel.sort;
+package com.hovel.algorithm.sort;
 
 public class SortUtil {
 
