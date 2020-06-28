@@ -1,7 +1,5 @@
 package com.hovel.algorithm.list;
 
-import lombok.AllArgsConstructor;
-
 /**
  * @author Kevin
  */
