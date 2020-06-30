@@ -13,22 +13,16 @@ public class FooBar {
     }
 
     public void foo(Runnable printFoo) throws InterruptedException {
-
         for (int i = 1; i <= n; i++) {
-
             foo.acquire();
-            // printFoo.run() outputs "foo". Do not change or remove this line.
             printFoo.run();
             bar.release();
-
         }
     }
 
     public void bar(Runnable printBar) throws InterruptedException {
-
         for (int i = 1; i <= n; i++) {
             bar.acquire();
-            // printBar.run() outputs "bar". Do not change or remove this line.
             printBar.run();
             foo.release();
         }

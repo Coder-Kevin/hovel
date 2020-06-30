@@ -1,6 +1,7 @@
 package com.hovel.leetcode.thread;
 
 import lombok.SneakyThrows;
+import org.junit.Test;
 
 /**
  * 两个不同的线程将会共用一个 FooBar 实例。其中一个线程将会调用 foo() 方法，另一个线程将会调用 bar() 方法。
@@ -12,8 +13,9 @@ import lombok.SneakyThrows;
 public class Main1115 {
 
 
-    public static void main(String[] args) throws InterruptedException {
-        FooBar fooBar = new FooBar(3);
+    @Test
+    public void semphore() throws InterruptedException {
+        FooBar fooBar = new FooBar(5);
 
         new Thread(new Runnable() {
             @SneakyThrows
@@ -30,8 +32,27 @@ public class Main1115 {
                 fooBar.bar(new PrintBar());
             }
         }).start();
+    }
 
+    @Test
+    public void waitAndNotify(){
+        FooBar2 fooBar2 = new FooBar2(5);
 
+        new Thread(new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                fooBar2.foo(new PrintFoo());
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                fooBar2.bar(new PrintBar());
+            }
+        }).start();
     }
 
 }
