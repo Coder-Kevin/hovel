@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class SortDemo1 {
 
     public static void main(String[] args) {
-        int[] arr = new int[]{2, 5, 1, 7, 4, 9};
+        int[] arr = new int[]{2, 3, 5, 1, 7, 1, 4, 9};
         System.out.println(Arrays.toString(arr));
         int len = arr.length;
         for (int i = 0; i < len - 1; i++) {
