@@ -1,6 +1,6 @@
 package com.hovel.algorithm;
 
-public class Solution378A {
+public class Solution378B {
 
 
     public static void main(String[] args) {
@@ -29,13 +29,14 @@ public class Solution378A {
         int count = 0;
         int result = 0;
 
-        if (k > length / 2) {
-            result = sortLastHalf(matrix, k, matrix.length, count);
+//        if (k > length / 2) {
+//            result = sortLastHalf(matrix, k, matrix.length, count);
+//
+//        } else {
+//            result = sortPreHalf(matrix, k, matrix.length, count);
+//        }
 
-        } else {
-            result = sortPreHalf(matrix, k, matrix.length, count);
-        }
-
+        result = sortPreHalf(matrix, k, matrix.length, count);
         return result;
     }
 
@@ -48,14 +49,13 @@ public class Solution378A {
      * @return
      */
     private static int sortLastHalf(int[][] matrix, int k, int length, int count) {
-        // 倒数第几大元素的个数，第k小就是length-k+1大
-        int index = length * length - k + 1;
-
+        // 第k小   就是  length-k+1大
         int row = length - 1;
         int col = length - 1;
 
         int m = col;
 
+        int index = length * length - k + 1;
         while (true) {
             if (k == length) {
                 return matrix[row][col];
@@ -80,7 +80,7 @@ public class Solution378A {
 //                if (matrix[row][col] )
                 row--;
                 col = length - 1;
-//                m--;
+                m--;
                 if (row <= 0) {
                     return matrix[0][k - count - 1];
                 }
