@@ -1,8 +1,8 @@
 package com.hovel.algorithm.clps;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import org.apache.poi.ss.formula.functions.T;
+
+import java.util.*;
 
 /**
  * @author Kevin
@@ -20,13 +20,15 @@ public class ThirdQuestion {
         int n = sc.nextInt();
 
         Queue<TreeNode> treeNodes = new LinkedList<>();
+        Map<String, TreeNode> map = new HashMap<>();
+
         TreeNode root = null;
         while (n > 0) {
             n--;
             String nodeString = sc.next();
             String[] nodes = nodeString.split(",");
 
-            TreeNode fatherNode = new TreeNode(Integer.parseInt(nodes[0]));
+            TreeNode fatherNode = getOrAdd(nodes[0], map);
             if (root == null) {
                 root = fatherNode;
             } else {
@@ -35,10 +37,7 @@ public class ThirdQuestion {
                 }
             }
 
-            TreeNode sonNode = new TreeNode(Integer.parseInt(nodes[0]));
-
-            treeNodes.add(fatherNode);
-            treeNodes.add(sonNode);
+            TreeNode sonNode = getOrAdd(nodes[1], map);
 
             if (fatherNode.getLeftNode() == null) {
                 fatherNode.setLeftNode(sonNode);
@@ -47,7 +46,36 @@ public class ThirdQuestion {
             }
         }
 
+        if (root != null) {
+            add(root, treeNodes);
+        }
 
+        for (TreeNode treeNode : treeNodes) {
+            System.out.print(treeNode.val + " ");
+        }
+
+    }
+
+    public static TreeNode getOrAdd(String val, Map<String, TreeNode> map) {
+        if (map.containsKey(val)) {
+            return map.get(val);
+        }
+
+        TreeNode node = new TreeNode(Integer.parseInt(val));
+        map.put(val, node);
+        return node;
+    }
+
+    public static void add(TreeNode node, Queue<TreeNode> list) {
+        list.add(node);
+
+        if (node.leftNode != null) {
+            add(node.leftNode, list);
+        }
+
+        if (node.rightNode != null) {
+            add(node.rightNode, list);
+        }
     }
 
     public static int[] createTree() {
@@ -88,6 +116,15 @@ public class ThirdQuestion {
 
         public void setRightNode(TreeNode rightNode) {
             this.rightNode = rightNode;
+        }
+
+        @Override
+        public String toString() {
+            return "TreeNode{" +
+                    "val=" + val +
+                    ", leftNode=" + leftNode +
+                    ", rightNode=" + rightNode +
+                    '}';
         }
     }
 
