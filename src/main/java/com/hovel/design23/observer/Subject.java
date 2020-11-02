@@ -16,7 +16,7 @@ public class Subject extends AbstractSubject {
     public void notifyAllObserversStateChanged() {
         System.out.println("开始通知所有观察者-----");
         for (AbstractObserver observer : observerList) {
-            observer.getStateChangedNotice();
+            observer.getStateChangedNotice(state);
         }
     }
 }

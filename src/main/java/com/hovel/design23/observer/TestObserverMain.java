@@ -14,17 +14,6 @@ public class TestObserverMain {
         subject.add(observer2);
 
         subject.notifyAllObservers();
-    }
-
-    @Test
-    public void test2() {
-        AbstractSubject subject = new Subject();
-
-        AbstractObserver observer1 = new ObserverOne(subject);
-        AbstractObserver observer2 = new ObserverTwo(subject);
-
-        subject.add(observer1);
-        subject.add(observer2);
 
         subject.changeState(2);
     }

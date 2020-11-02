@@ -30,7 +30,4 @@ public abstract class AbstractSubject {
         notifyAllObserversStateChanged();
     }
 
-    public int getState() {
-        return state;
-    }
 }

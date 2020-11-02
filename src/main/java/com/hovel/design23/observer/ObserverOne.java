@@ -5,14 +5,8 @@ package com.hovel.design23.observer;
  */
 public class ObserverOne extends AbstractObserver {
 
-    private AbstractSubject subject;
-
     public ObserverOne() {
 
-    }
-
-    public ObserverOne(AbstractSubject subject) {
-        this.subject = subject;
     }
 
     @Override
@@ -21,7 +15,7 @@ public class ObserverOne extends AbstractObserver {
     }
 
     @Override
-    public void getStateChangedNotice() {
-        System.out.println("观察者1得到状态改变的通知:" + subject.getState());
+    public void getStateChangedNotice(int state) {
+        System.out.println("观察者1得到状态改变的通知:" + state);
     }
 }

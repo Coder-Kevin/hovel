@@ -2,14 +2,8 @@ package com.hovel.design23.observer;
 
 public class ObserverTwo extends AbstractObserver {
 
-    private AbstractSubject subject;
-
     public ObserverTwo() {
 
-    }
-
-    public ObserverTwo(AbstractSubject subject) {
-        this.subject = subject;
     }
 
     @Override
@@ -18,7 +12,7 @@ public class ObserverTwo extends AbstractObserver {
     }
 
     @Override
-    public void getStateChangedNotice() {
-        System.out.println("观察者2得到状态改变的通知:" + subject.getState());
+    public void getStateChangedNotice(int state) {
+        System.out.println("观察者2得到状态改变的通知:" + state);
     }
 }

@@ -7,6 +7,6 @@ public abstract class AbstractObserver {
 
     public abstract void response();
 
-    public abstract void getStateChangedNotice();
+    public abstract void getStateChangedNotice(int state);
 
 }
