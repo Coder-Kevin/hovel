@@ -1,4 +1,4 @@
-package com.hovel.design23.observer;
+package com.hovel.design.action.observer;
 
 /**
  * 具体目标类

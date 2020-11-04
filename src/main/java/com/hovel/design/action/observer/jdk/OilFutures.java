@@ -1,4 +1,4 @@
-package com.hovel.design23.observer.jdk;
+package com.hovel.design.action.observer.jdk;
 
 import java.util.Observable;
 

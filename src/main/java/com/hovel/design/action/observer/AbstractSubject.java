@@ -1,4 +1,4 @@
-package com.hovel.design23.observer;
+package com.hovel.design.action.observer;
 
 import java.util.*;
 import java.util.ArrayList;

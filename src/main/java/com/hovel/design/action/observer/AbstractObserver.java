@@ -1,4 +1,4 @@
-package com.hovel.design23.observer;
+package com.hovel.design.action.observer;
 
 /**
  * 抽象观察者类
