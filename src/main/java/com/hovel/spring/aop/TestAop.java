@@ -1,4 +1,4 @@
-package com.hovel.aop;
+package com.hovel.spring.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -17,7 +17,7 @@ public class TestAop {
 
     private Logger logger = LoggerFactory.getLogger(TestAop.class);
 
-    @Pointcut("execution (* com.hovel.sevice.impl.*.*(..))")
+    @Pointcut("execution (* com.hovel.spring.sevice.impl.*.*(..))")
     public void webLog() {
     }
 

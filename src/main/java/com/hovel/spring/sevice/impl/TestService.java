@@ -1,4 +1,4 @@
-package com.hovel.sevice.impl;
+package com.hovel.spring.sevice.impl;
 
 import org.springframework.stereotype.Component;
 

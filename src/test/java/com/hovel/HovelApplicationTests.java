@@ -1,6 +1,6 @@
 package com.hovel;
 
-import com.hovel.sevice.IService;
+import com.hovel.spring.sevice.IService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

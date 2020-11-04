@@ -1,4 +1,4 @@
-package com.hovel;
+package com.hovel.base;
 
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;

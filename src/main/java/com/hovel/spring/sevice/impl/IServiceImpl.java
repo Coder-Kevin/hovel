@@ -1,6 +1,6 @@
-package com.hovel.sevice.impl;
+package com.hovel.spring.sevice.impl;
 
-import com.hovel.sevice.IService;
+import com.hovel.spring.sevice.IService;
 import org.springframework.stereotype.Service;
 
 /**

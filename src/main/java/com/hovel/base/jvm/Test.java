@@ -1,4 +1,4 @@
-package com.hovel.jvm;
+package com.hovel.base.jvm;
 
 public class Test {
 

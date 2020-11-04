@@ -1,4 +1,4 @@
-package com.hovel.action;
+package com.hovel.spring.action;
 
 import lombok.Data;
 

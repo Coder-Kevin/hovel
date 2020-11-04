@@ -1,4 +1,4 @@
-package com.hovel.sevice;
+package com.hovel.spring.sevice;
 
 public interface IService {
 

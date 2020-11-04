@@ -1,10 +1,9 @@
-package com.hovel.action;
+package com.hovel.spring.action;
 
 import com.hovel.base.thread.threadlocal.RequestHelper;
-import com.hovel.sevice.IService;
-import com.hovel.sevice.impl.IServiceImpl;
-import com.hovel.sevice.impl.TestService;
-import org.checkerframework.checker.units.qual.A;
+import com.hovel.spring.sevice.IService;
+import com.hovel.spring.sevice.impl.IServiceImpl;
+import com.hovel.spring.sevice.impl.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,8 +39,8 @@ public class HelloAction {
         System.out.println(new IServiceImpl());
 
         /**
-         * class com.hovel.sevice.impl.TestService$$EnhancerBySpringCGLIB$$ef633e82
-         * class com.hovel.sevice.impl.IServiceImpl$$EnhancerBySpringCGLIB$$b7e8bfc5
+         * class com.hovel.spring.sevice.impl.TestService$$EnhancerBySpringCGLIB$$ef633e82
+         * class com.hovel.spring.sevice.impl.IServiceImpl$$EnhancerBySpringCGLIB$$b7e8bfc5
          */
         System.out.println(testService.getClass());
         System.out.println(service.getClass());

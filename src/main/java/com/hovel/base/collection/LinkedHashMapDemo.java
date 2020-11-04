@@ -1,4 +1,4 @@
-package com.hovel.collection;
+package com.hovel.base.collection;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
