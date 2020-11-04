@@ -4,6 +4,7 @@ import com.hovel.base.thread.threadlocal.RequestHelper;
 import com.hovel.spring.sevice.IService;
 import com.hovel.spring.sevice.impl.IServiceImpl;
 import com.hovel.spring.sevice.impl.TestService;
+import com.hovel.spring.vo.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,13 +26,10 @@ public class HelloAction {
     @ResponseBody
     public String hello() {
         service.test();
-
 //        service.hello();
-
         testService.test();
 
         TestService.testFinal();
-
         TestService.testStatic();
 
         System.out.println(testService);
@@ -52,18 +50,14 @@ public class HelloAction {
     @GetMapping("/test/array")
     @ResponseBody
     public Object testArray(@RequestBody Param param) {
-
         System.out.println(param);
-
         return "hello";
     }
 
     @GetMapping("/test/array0")
     @ResponseBody
     public Object testArray0(@RequestBody Param param) {
-
         System.out.println(param);
-
         return "hello";
     }
 }
