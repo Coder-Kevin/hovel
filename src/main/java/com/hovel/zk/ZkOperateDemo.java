@@ -24,8 +24,12 @@ public class ZkOperateDemo {
 
 
         if (stat == null) {
-            client.create().forPath("/locks/lock_01");
+            client.create().forPath("/locks");
         }
+
+//        client.create().forPath("/locks/lock_test_01");
+        stat = client.checkExists().forPath("/locks/lock_test_01");
+        log.info("/locks/lock_test_01 state is {}", stat);
 
         client.close();
 
