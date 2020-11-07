@@ -8,7 +8,7 @@ import java.security.MessageDigest;
 import java.util.Random;
 
 
-public class Utils {
+public class CryptUtils {
 
     /**
      * @Description: 加密

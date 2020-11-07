@@ -40,14 +40,14 @@ public class HttpsUrlConnectionForTLS {
         System.out.println(apiUrl);
 
         /*每次接口调用生成随机加密字符串*/
-        String x_bigtree_nonce = Utils.makeRandomStr(16);
+        String x_bigtree_nonce = CryptUtils.makeRandomStr(16);
 
         //AES加密(去掉空格和换行)
-        String aesJsonStr = Utils.encrypt(newparams, ACCESS_KEY, x_bigtree_nonce).replaceAll(REPLACE_STR, "");
+        String aesJsonStr = CryptUtils.encrypt(newparams, ACCESS_KEY, x_bigtree_nonce).replaceAll(REPLACE_STR, "");
         //签名规则
         String signRule = ACCESS_KEY + aesJsonStr + APPID + x_bigtree_nonce;
         //MD5签名(去掉空格和换行)
-        String sign = Utils.md5(signRule.replaceAll(REPLACE_STR, ""));
+        String sign = CryptUtils.md5(signRule.replaceAll(REPLACE_STR, ""));
         Map<String, String> param = new HashMap<String, String>();
         param.put("data", URLEncoder.encode(aesJsonStr, "UTF-8"));
         System.out.println("nonce:" + x_bigtree_nonce + ",sign:" + sign);
