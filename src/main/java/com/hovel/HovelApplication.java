@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @ServletComponentScan
-//@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy
 public class HovelApplication implements WebMvcConfigurer {
 
     public static void main(String[] args) {
@@ -22,7 +22,6 @@ public class HovelApplication implements WebMvcConfigurer {
     @Bean //将组件注册在容器中
     public WebMvcConfigurer webMvcConfigurerAdapter() {
         return new WebMvcConfigurer() {
-
             //注册拦截器
             @Override
             public void addInterceptors(InterceptorRegistry registry) {
