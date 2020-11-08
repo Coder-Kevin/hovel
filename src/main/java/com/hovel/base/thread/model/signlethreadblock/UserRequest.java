@@ -11,8 +11,6 @@ public class UserRequest {
         for (int i = 0; i < 200; i++) {
             executorService.submit(new UserTask());
         }
-
         executorService.shutdown();
-
     }
 }

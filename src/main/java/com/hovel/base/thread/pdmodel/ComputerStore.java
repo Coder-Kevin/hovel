@@ -1,10 +1,12 @@
 package com.hovel.base.thread.pdmodel;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Slf4j
 public class ComputerStore {
 
     private static AtomicInteger count = new AtomicInteger();
@@ -16,37 +18,37 @@ public class ComputerStore {
     public void create(String type, String num, String name) throws InterruptedException {
 
         synchronized (lock) {
-            System.out.println("生产者" + Thread.currentThread().getName() + " get lock");
+            log.info("生产者" + Thread.currentThread().getName() + " get lock");
             while (count.intValue() == 100) {
-                System.out.println(Thread.currentThread().getName() + "发现仓库已经满了");
+                log.info(Thread.currentThread().getName() + "发现仓库已经满了");
                 lock.wait();
             }
             Computer computer = new Computer(type, num, name);
             computers.add(computer);
             count.addAndGet(1);
             lock.notifyAll();
-            System.out.println(Thread.currentThread().getName() + " - 生产电脑：" + computer + ",理论库存：" + count + ",实际库存" + computers.size());
-            System.out.println("生产者" + Thread.currentThread().getName() + " release lock");
+            log.info(Thread.currentThread().getName() + " - 生产电脑：" + computer + ",理论库存：" + count + ",实际库存" + computers.size());
+            log.info("生产者" + Thread.currentThread().getName() + " release lock");
         }
     }
 
     @SneakyThrows
     public void consume() {
         synchronized (lock) {
-            System.out.println("消费者" + Thread.currentThread().getName() + " get lock");
+            log.info("消费者" + Thread.currentThread().getName() + " get lock");
             while (!hasProduct()) {
                 lock.wait();
             }
             if (count.intValue() != 0) {
                 Computer computer = computers.remove(computers.size() - 1);
                 count.decrementAndGet();
-                System.out.println(Thread.currentThread().getName() + " - 买走电脑：" + computer + ",理论库存：" + count.intValue() + ",实际库存" + computers.size());
+                log.info(Thread.currentThread().getName() + " - 买走电脑：" + computer + ",理论库存：" + count.intValue() + ",实际库存" + computers.size());
             }
 
             if (!full()) {
                 lock.notifyAll();
             }
-            System.out.println("消费者" + Thread.currentThread().getName() + " release lock");
+            log.info("消费者" + Thread.currentThread().getName() + " release lock");
         }
     }
 

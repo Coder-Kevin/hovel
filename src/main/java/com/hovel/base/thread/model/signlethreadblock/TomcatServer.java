@@ -1,6 +1,7 @@
 package com.hovel.base.thread.model.signlethreadblock;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +10,7 @@ import java.io.Reader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+@Slf4j
 public class TomcatServer {
 
     @SneakyThrows
@@ -21,7 +23,7 @@ public class TomcatServer {
             serverSocket = new ServerSocket(8081);
             while (true) {
                 socket = serverSocket.accept();
-                System.out.print("客户端连接....");
+                log.info("客户端连接....");
                 inputStream = socket.getInputStream();
                 Reader reader = new InputStreamReader(inputStream);
                 char[] chars = new char[1024];
@@ -31,21 +33,21 @@ public class TomcatServer {
                     result.append(chars);
                 }
 
-                System.out.println(result);
+                log.info(result.toString());
 
                 Thread.sleep(3000);
-                System.out.println(result + " sleep 3s done");
+                log.info(result + " sleep 3s done");
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("{}", e);
         } finally {
             try {
                 inputStream.close();
                 socket.close();
                 serverSocket.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("{}", e);
             }
         }
     }

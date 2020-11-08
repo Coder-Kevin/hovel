@@ -1,5 +1,6 @@
 package com.hovel.base.thread.unsafe;
 
+import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.ThreadSafe;
 
 import java.util.concurrent.CountDownLatch;
@@ -8,6 +9,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 @ThreadSafe
+@Slf4j
 public class StringBufferExample {
 
     // 请求总数
@@ -30,7 +32,7 @@ public class StringBufferExample {
                     add();
                     semaphore.release();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常:{}", e);
                 }
 
                 countDownLatch.countDown();
@@ -40,7 +42,7 @@ public class StringBufferExample {
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("异常:{}", e);
         }
 
         System.out.println(stringBuilder.length());

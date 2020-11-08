@@ -17,21 +17,15 @@ public class VectorExample2 {
             list.add(i);
         }
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 5; i++) {
-                    list.remove(i); // get恰好已被remove移除就会异常
-                }
+        new Thread(() -> {
+            for (int i = 0; i < 5; i++) {
+                list.remove(i); // get恰好已被remove移除就会异常
             }
         }).start();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 5; i++) {
-                    list.get(i);
-                }
+        new Thread(() -> {
+            for (int i = 0; i < 5; i++) {
+                list.get(i);
             }
         }).start();
 

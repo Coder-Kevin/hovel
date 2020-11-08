@@ -1,5 +1,6 @@
 package com.hovel.base.thread.unsafe;
 
+import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.ThreadSafe;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -11,6 +12,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 @ThreadSafe
+@Slf4j
 public class JodaDateFormatExample {
 
     // 请求总数
@@ -33,7 +35,7 @@ public class JodaDateFormatExample {
                     add();
                     semaphore.release();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常:{}", e);
                 }
 
                 countDownLatch.countDown();
@@ -43,7 +45,7 @@ public class JodaDateFormatExample {
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("异常:{}", e);
         }
 
         executorService.shutdown();

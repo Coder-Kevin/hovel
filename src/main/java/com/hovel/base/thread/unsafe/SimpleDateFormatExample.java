@@ -1,5 +1,6 @@
 package com.hovel.base.thread.unsafe;
 
+import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.NotThreadSafe;
 
 import java.text.SimpleDateFormat;
@@ -9,6 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 @NotThreadSafe
+@Slf4j
 public class SimpleDateFormatExample {
 
     // 请求总数
@@ -31,9 +33,8 @@ public class SimpleDateFormatExample {
                     add();
                     semaphore.release();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常:{}", e);
                 }
-
                 countDownLatch.countDown();
             });
         }
@@ -41,9 +42,8 @@ public class SimpleDateFormatExample {
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("异常:{}", e);
         }
-
         executorService.shutdown();
     }
 
@@ -51,8 +51,7 @@ public class SimpleDateFormatExample {
         try {
             simpleDateFormat.parse("20200328");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("异常:{}", e);
         }
     }
-
 }

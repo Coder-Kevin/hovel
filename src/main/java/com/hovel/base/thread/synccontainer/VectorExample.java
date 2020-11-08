@@ -3,7 +3,6 @@ package com.hovel.base.thread.synccontainer;
 import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.ThreadSafe;
 
-import java.text.SimpleDateFormat;
 import java.util.Vector;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -35,7 +34,7 @@ public class VectorExample {
                     add(num);
                     semaphore.release();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常:{}", e);
                 }
 
                 countDownLatch.countDown();
@@ -45,7 +44,7 @@ public class VectorExample {
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("异常:{}", e);
         }
 
         executorService.shutdown();

@@ -6,7 +6,6 @@ import net.jcip.annotations.ThreadSafe;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -15,7 +14,6 @@ import java.util.concurrent.Semaphore;
 @ThreadSafe
 @Slf4j
 public class CollectionsExample {
-
     // 请求总数
     public static int requestTotal = 2000;
 
@@ -37,9 +35,8 @@ public class CollectionsExample {
                     add(num);
                     semaphore.release();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("{}", e);
                 }
-
                 countDownLatch.countDown();
             });
         }
@@ -47,11 +44,9 @@ public class CollectionsExample {
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("{}", e);
         }
-
         executorService.shutdown();
-
         log.info("{}", list.size());
     }
 

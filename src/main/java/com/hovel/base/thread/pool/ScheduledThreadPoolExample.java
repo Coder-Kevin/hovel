@@ -13,16 +13,13 @@ public class ScheduledThreadPoolExample {
         System.out.println("执行的时间大于设定的周期");
         ScheduledExecutorService service = Executors.newScheduledThreadPool(5);
 
-        service.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    log.info("start task");
-                    Thread.sleep(8000);
-                    log.info("done");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        service.scheduleAtFixedRate(() -> {
+            try {
+                log.info("start task");
+                Thread.sleep(8000);
+                log.info("done");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }, 3000, 5000, TimeUnit.MILLISECONDS);
     }

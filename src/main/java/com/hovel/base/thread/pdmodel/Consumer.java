@@ -12,7 +12,6 @@ public class Consumer implements Runnable {
         this.computerStore = computerStore;
     }
 
-
     @SneakyThrows
     @Override
     public void run() {

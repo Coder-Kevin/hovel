@@ -31,7 +31,7 @@ public class CopyOnWriteArrayListExample {
                     add(num);
                     semaphore.release();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("异常:{}", e);
                 }
 
                 countDownLatch.countDown();
@@ -41,7 +41,7 @@ public class CopyOnWriteArrayListExample {
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("异常:{}", e);
         }
         executorService.shutdown();
         log.info("{}", list.size());

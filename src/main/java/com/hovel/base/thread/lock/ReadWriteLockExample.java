@@ -41,13 +41,7 @@ public class ReadWriteLockExample {
             }
         }).start();
 
-        new Thread(new Runnable() {
-            @SneakyThrows
-            @Override
-            public void run() {
-                example.put("2", new Data());
-            }
-        }).start();
+        new Thread(() -> example.put("2", new Data())).start();
     }
 
     public Data get(String key) {

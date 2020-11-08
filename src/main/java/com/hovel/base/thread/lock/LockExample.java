@@ -7,7 +7,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 @ThreadSafe
@@ -36,7 +35,7 @@ public class LockExample {
                     add();
                     semaphore.release();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("{}", e);
                 }
 
                 countDownLatch.countDown();
@@ -46,10 +45,10 @@ public class LockExample {
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("{}", e);
         }
 
-        System.out.println(count);
+        log.info(String.valueOf(count));
         executorService.shutdown();
     }
 
