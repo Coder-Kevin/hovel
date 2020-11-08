@@ -12,24 +12,23 @@ import org.junit.Test;
  */
 public class Main1115 {
 
-
     @Test
     public void semphore() throws InterruptedException {
         FooBar fooBar = new FooBar(5);
 
-        new Thread(new Runnable() {
-            @SneakyThrows
-            @Override
-            public void run() {
+        new Thread(() -> {
+            try {
                 fooBar.foo(new PrintFoo());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }).start();
 
-        new Thread(new Runnable() {
-            @SneakyThrows
-            @Override
-            public void run() {
+        new Thread(() -> {
+            try {
                 fooBar.bar(new PrintBar());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }).start();
     }
@@ -38,19 +37,19 @@ public class Main1115 {
     public void waitAndNotify(){
         FooBar2 fooBar2 = new FooBar2(5);
 
-        new Thread(new Runnable() {
-            @SneakyThrows
-            @Override
-            public void run() {
+        new Thread(() -> {
+            try {
                 fooBar2.foo(new PrintFoo());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }).start();
 
-        new Thread(new Runnable() {
-            @SneakyThrows
-            @Override
-            public void run() {
+        new Thread(() -> {
+            try {
                 fooBar2.bar(new PrintBar());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }).start();
     }

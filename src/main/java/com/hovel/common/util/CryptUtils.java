@@ -1,4 +1,4 @@
-package com.hovel.http;
+package com.hovel.common.util;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;

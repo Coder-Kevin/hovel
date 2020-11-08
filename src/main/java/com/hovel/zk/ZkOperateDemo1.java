@@ -22,7 +22,7 @@ public class ZkOperateDemo1 {
                 new RetryNTimes(10, 5000)
         );
         client.start();
-        System.out.println("zk client start successfully!");
+        log.info("zk client start successfully!");
 
         final String path = "/test";
 
@@ -51,14 +51,13 @@ public class ZkOperateDemo1 {
                 new RetryNTimes(10, 5000)
         );
         client.start();
-        System.out.println("zk client start successfully!");
+        log.info("zk client start successfully!");
         GetChildrenBuilder childrenBuilder = client.getChildren();
         List<String> paths = childrenBuilder.forPath("/");
         log.info("{}", paths);
 
         client.close();
     }
-
 
     /**
      * zk Watcher

@@ -17,7 +17,7 @@ public class ZkOperateDemo {
                 new RetryNTimes(10, 5000)
         );
         client.start();
-        System.out.println("zk client start successfully!");
+        log.info("zk client start successfully!");
 
         Stat stat = client.checkExists().forPath("/locks");
         log.info("/locks state is {}", stat);

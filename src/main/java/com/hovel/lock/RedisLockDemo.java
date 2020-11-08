@@ -1,9 +1,11 @@
 package com.hovel.lock;
 
+import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 
 import java.util.concurrent.CountDownLatch;
 
+@Slf4j
 public class RedisLockDemo {
 
     public static void main(String[] args) throws InterruptedException {
@@ -21,7 +23,6 @@ public class RedisLockDemo {
             countDownLatch.countDown();
         }, "t2");
 
-
         t1.start();
         t2.start();
 
@@ -32,7 +33,7 @@ public class RedisLockDemo {
     private static void doWithLock(RedisLock redisLock) {
         try {
             if (redisLock.lockByRedis("1", 9000)) {
-                System.out.println(Thread.currentThread().getName() + " hold lock");
+                log.info(Thread.currentThread().getName() + " hold lock");
                 Thread.sleep(5000L);
             }
         } catch (Exception e) {
@@ -40,12 +41,11 @@ public class RedisLockDemo {
         } finally {
             try {
                 redisLock.unlockByRedis("1");
-                System.out.println(Thread.currentThread().getName() + " release lock");
+                log.info(Thread.currentThread().getName() + " release lock");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-
 
 }

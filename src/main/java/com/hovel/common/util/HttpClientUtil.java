@@ -1,4 +1,4 @@
-package com.hovel.http;
+package com.hovel.common.util;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -15,11 +15,6 @@ import java.util.concurrent.Future;
 public class HttpClientUtil {
 
     private HttpClientUtil() {
-    }
-
-    public static void main(String[] args) {
-        String result = get("http://localhost:8046/user/Kevin");
-        System.out.println(result);
     }
 
     public static String get(String url) {

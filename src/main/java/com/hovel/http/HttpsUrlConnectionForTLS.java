@@ -2,6 +2,7 @@ package com.hovel.http;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hovel.common.util.CryptUtils;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;

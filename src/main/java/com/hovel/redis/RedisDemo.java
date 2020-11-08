@@ -1,5 +1,6 @@
 package com.hovel.redis;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,17 +15,17 @@ import java.util.Set;
 /**
  * @author Kevin
  */
+@Slf4j
 public class RedisDemo {
 
     public static void main(String[] args) {
         Jedis jedis = new Jedis();
-        System.out.println("redis 连接成功 " + jedis.ping());
+        log.info("redis 连接成功 " + jedis.ping());
 
         jedis.set("hello", "1");
-        System.out.println(jedis.get("hello"));
+        log.info(jedis.get("hello"));
 
         jedis.close();
-
     }
 
     public static Jedis jedis = null;
@@ -47,17 +48,15 @@ public class RedisDemo {
         jedis.lpush("mylist", "2");
         jedis.lpush("mylist", "3");
         jedis.lpush("mylist", "4");
-
         List<String> list = jedis.lrange("mylist", 0, 2);
-
-        System.out.println(Arrays.toString(list.toArray()));
+        log.info(Arrays.toString(list.toArray()));
     }
 
     @Test
     public void keys() {
         Set<String> keys = jedis.keys("my*");
         if (keys != null && !keys.isEmpty()) {
-            keys.forEach(key -> System.out.println(key));
+            keys.forEach(key -> log.info(key));
         }
     }
 
@@ -65,9 +64,8 @@ public class RedisDemo {
     public void scan() {
         ScanResult<String> scanResult = jedis.scan("0");
         List<String> list = scanResult.getResult();
-        System.out.println(Arrays.toString(list.toArray()));
+        log.info(Arrays.toString(list.toArray()));
     }
-
 
     @Test
     public void multi() {
@@ -75,38 +73,35 @@ public class RedisDemo {
         transaction.set("mu", "ha");
         transaction.zadd("mu", 1, "ha");
         List<Object> execResult = transaction.exec();
-        System.out.println(Arrays.toString(execResult.toArray()));
+        log.info(Arrays.toString(execResult.toArray()));
 
-        System.out.println(jedis.get("mu"));
+        log.info(jedis.get("mu"));
     }
-
 
     @Test
     public void multiNotSafe() {
         Jedis anotherJedis = new Jedis();
-
         jedis.set("mu", "hello");
         Transaction transaction = jedis.multi();
         transaction.append("mu", "1");
         anotherJedis.append("mu", "hu");
         List<Object> execResult = transaction.exec();
-        System.out.println(Arrays.toString(execResult.toArray()));
-        System.out.println(anotherJedis.get("mu"));
+        log.info(Arrays.toString(execResult.toArray()));
+        log.info(anotherJedis.get("mu"));
         anotherJedis.close();
     }
 
     @Test
     public void multiSafe() {
         Jedis anotherJedis = new Jedis();
-
         Transaction transaction = jedis.multi();
         transaction.set("mu", "hi"); // 存在这一句，结果不会出问题
         transaction.append("mu", "1");
         anotherJedis.append("mu", "hu");
         List<Object> execResult = transaction.exec();
-        System.out.println(Arrays.toString(execResult.toArray()));
-        System.out.println(anotherJedis.get("mu"));
-        System.out.println(jedis.get("mu"));
+        log.info(Arrays.toString(execResult.toArray()));
+        log.info(anotherJedis.get("mu"));
+        log.info(jedis.get("mu"));
         anotherJedis.close();
     }
 
@@ -114,7 +109,6 @@ public class RedisDemo {
     public void multiWatch() {
         Jedis anotherJedis = new Jedis();
         jedis.set("mu", "1");
-
         // 监视一个(或多个) key ，如果在事务执行之前这个(或这些) key 被其他命令所改动，那么事务将被打断。
         jedis.watch("mu");
         Transaction transaction = jedis.multi();
@@ -124,13 +118,12 @@ public class RedisDemo {
         List<Object> execResult = transaction.exec();
 
         if (execResult == null || execResult.isEmpty()) {
-            System.out.println(jedis.get("mu"));
+            log.info(jedis.get("mu"));
             // 乐观锁
         } else {
-            System.out.println(Arrays.toString(execResult.toArray()));
-            System.out.println(jedis.get("mu"));
+            log.info(Arrays.toString(execResult.toArray()));
+            log.info(jedis.get("mu"));
         }
-
         anotherJedis.close();
     }
 
