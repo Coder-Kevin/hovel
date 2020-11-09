@@ -7,6 +7,7 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.api.transaction.CuratorOp;
 import org.apache.curator.framework.api.transaction.CuratorTransactionResult;
+import org.apache.curator.framework.recipes.cache.CuratorCache;
 import org.apache.curator.retry.RetryNTimes;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
@@ -19,7 +20,7 @@ import java.util.List;
 @Slf4j
 public class ZkOperateDemo {
 
-    private static final String ZK_ADDRESS = "127.0.0.1:2188";
+    private static final String ZK_ADDRESS = "127.0.0.1:2181";
 
     private static CuratorFramework client = null;
 
@@ -109,7 +110,7 @@ public class ZkOperateDemo {
     @SneakyThrows
     @Test
     public void transaction() {
-        if (client.checkExists().forPath("/trans") != null){
+        if (client.checkExists().forPath("/trans") != null) {
             log.info("/trans已经存在");
             client.delete().forPath("/trans");
         }
@@ -119,6 +120,39 @@ public class ZkOperateDemo {
 
         List<CuratorTransactionResult> curatorTransactionResults = client.transaction().forOperations(createOp, setDataOp, reCreateOp);
         curatorTransactionResults.forEach(curatorTransactionResult -> log.info("执行结果：{}", JSONObject.toJSONString(curatorTransactionResult)));
+    }
+
+    @Test
+    public void watch() throws Exception {
+        String path = "/test";
+        if (client.checkExists().forPath(path) == null) {
+            client.create().forPath(path);
+        }
+        final CuratorCache curatorCache = CuratorCache.builder(client, path).build();
+
+        curatorCache.start();
+
+        curatorCache.listenable().addListener((type, oldData, data) -> {
+            if (data != null) {
+                log.info("data:{}", new String(data.getData() == null ? new byte[0] : data.getData()));
+            }
+
+            if (type != null) {
+                log.info("type:{}", type);
+            }
+            if (oldData != null) {
+                log.info("oldData:{}", new String(oldData.getData() == null ? new byte[0] : oldData.getData()));
+            }
+        });
+
+        client.setData().forPath(path, "Jell".getBytes());
+
+        Thread.sleep(1000 * 4);
+
+        client.delete().forPath(path);
+
+        Thread.sleep(1000 * 4);
+
     }
 
 }
