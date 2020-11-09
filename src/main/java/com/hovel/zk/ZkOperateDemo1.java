@@ -54,7 +54,7 @@ public class ZkOperateDemo1 {
         log.info("zk client start successfully!");
         GetChildrenBuilder childrenBuilder = client.getChildren();
         List<String> paths = childrenBuilder.forPath("/");
-        log.info("{}", paths);
+        log.info("结果：{}", paths);
 
         client.close();
     }
