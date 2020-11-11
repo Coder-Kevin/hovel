@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 public class ZkOperateDemo {
 
-    private static final String ZK_ADDRESS = "127.0.0.1:2181";
+    private static final String ZK_ADDRESS = "127.0.0.1:2187";
 
     private static CuratorFramework client = null;
 
@@ -125,6 +125,13 @@ public class ZkOperateDemo {
     @Test
     public void watch() throws Exception {
         String path = "/test";
+        if (client.checkExists().forPath(path) != null) {
+            log.info("删除/test------");
+            client.delete().guaranteed().deletingChildrenIfNeeded().forPath(path);
+            Thread.sleep(1000 * 4);
+        }
+
+
         if (client.checkExists().forPath(path) == null) {
             client.create().forPath(path);
         }
@@ -145,12 +152,16 @@ public class ZkOperateDemo {
             }
         });
 
+        log.info("修改/test数据操作------");
         client.setData().forPath(path, "Jell".getBytes());
-
         Thread.sleep(1000 * 4);
 
-        client.delete().forPath(path);
+        log.info("新增/test子路径------");
+        client.create().forPath("/test/add");
+        Thread.sleep(1000 * 4);
 
+        log.info("删除/test------");
+        client.delete().guaranteed().deletingChildrenIfNeeded().forPath(path);
         Thread.sleep(1000 * 4);
 
     }

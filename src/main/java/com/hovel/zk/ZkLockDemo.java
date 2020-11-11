@@ -11,10 +11,10 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class ZkLockDemo {
 
-    private static final String ZK_ADDRESS = "127.0.0.1:2181";
+    private static final String ZK_ADDRESS = "127.0.0.1:2187";
     private static final String ZK_LOCK_PATH = "/locks/lock_01";
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         CuratorFramework client = CuratorFrameworkFactory.newClient(
                 ZK_ADDRESS,
                 new RetryNTimes(10, 5000)
@@ -32,13 +32,20 @@ public class ZkLockDemo {
         t1.start();
         t2.start();
 
-//        client.close();
     }
 
     private static void doWithLock(CuratorFramework client) {
         InterProcessMutex lock = new InterProcessMutex(client, ZK_LOCK_PATH);
         try {
-            if (lock.acquire(1000, TimeUnit.SECONDS)) {
+            /**
+             * 使用场景：假定设置的超时时间大于业务执行时间
+             * acquire入参有超时时间，加入业务执行时间大于节点超时时间就会出现问题
+             */
+            if (lock.acquire(200, TimeUnit.SECONDS)) {
+                if (Thread.currentThread().getName().startsWith("线程一")) {
+//                    Thread.currentThread().interrupt();
+//                    System.exit(1);
+                }
                 log.info("{} hold lock", Thread.currentThread().getName());
                 Thread.sleep(5000L);
 
