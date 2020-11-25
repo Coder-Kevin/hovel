@@ -1,4 +1,4 @@
-package com.hovel.http;
+package com.hovel.common.util.tls;
 
 import org.bouncycastle.crypto.tls.*;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;

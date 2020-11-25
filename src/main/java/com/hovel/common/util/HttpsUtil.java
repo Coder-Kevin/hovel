@@ -1,4 +1,4 @@
-package com.hovel.http;
+package com.hovel.common.util;
 
 import com.alibaba.fastjson.JSONObject;
 import org.jsoup.Connection;
