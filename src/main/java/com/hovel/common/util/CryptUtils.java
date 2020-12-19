@@ -4,7 +4,9 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -15,22 +17,22 @@ public class CryptUtils {
      * @Param: [raw, aes_key, aes_iv]
      * @Return: java.lang.String
      */
-    public static String encrypt(String raw, String key, String iv) throws Exception {
+    public static String encrypt(String raw, String key, String iv) {
         System.out.println("raw:" + raw);
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
             int blockSize = cipher.getBlockSize();
             byte[] dataBytes = raw.getBytes();
-            int dataLenth = dataBytes.length;
-            if (dataLenth % blockSize != 0) {
-                dataLenth = dataLenth + (blockSize - (dataLenth % blockSize));
+            int dataLength = dataBytes.length;
+            if (dataLength % blockSize != 0) {
+                dataLength = dataLength + (blockSize - (dataLength % blockSize));
             }
-            byte[] plaintext = new byte[dataLenth];
+            byte[] plaintext = new byte[dataLength];
             System.arraycopy(dataBytes, 0, plaintext, 0, dataBytes.length);
-            SecretKeySpec keyspec = new SecretKeySpec(key.getBytes(), "AES");
-            IvParameterSpec ivspec = new IvParameterSpec(iv.getBytes());
-            cipher.init(Cipher.ENCRYPT_MODE, keyspec, ivspec);
-            System.out.println("plaintext:" + plaintext);
+            SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), "AES");
+            IvParameterSpec ivSpec = new IvParameterSpec(iv.getBytes());
+            cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
+            System.out.println("plaintext:" + Arrays.toString(plaintext));
             byte[] encrypted = cipher.doFinal(plaintext);
             return new sun.misc.BASE64Encoder().encode(encrypted).replaceAll("\r\n", "");
         } catch (Exception e) {
@@ -45,7 +47,7 @@ public class CryptUtils {
      * @Param: [data, key, iv]
      * @Return: java.lang.String
      */
-    public static String desEncrypt(String data, String key, String iv) throws Exception {
+    public static String desEncrypt(String data, String key, String iv) {
         try {
 
             byte[] encrypted1 = new sun.misc.BASE64Decoder().decodeBuffer(data);
@@ -57,7 +59,7 @@ public class CryptUtils {
             cipher.init(Cipher.DECRYPT_MODE, keyspec, ivspec);
 
             byte[] original = cipher.doFinal(encrypted1);
-            String originalString = new String(original, "UTF-8");
+            String originalString = new String(original, StandardCharsets.UTF_8);
             return originalString.trim();
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,7 +71,7 @@ public class CryptUtils {
      * 16位随机密码生成
      */
     public static String makeRandomStr(int len) {
-        char charr[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();
+        char[] charr = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();
         StringBuilder sb = new StringBuilder();
         Random r = new Random();
 

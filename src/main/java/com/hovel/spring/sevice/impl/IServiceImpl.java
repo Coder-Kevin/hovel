@@ -13,8 +13,4 @@ public class IServiceImpl implements IService {
         System.out.println("-----test");
     }
 
-//    @Override
-//    public void hello() {
-//        System.out.println("-----override hello-----");
-//    }
 }

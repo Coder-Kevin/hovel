@@ -33,16 +33,10 @@ public class RedissonMultiLockExample {
         log.info("redis client start.....");
 
 
-        Thread t1 = new Thread(() -> {
-            doWithLock("lock1");
-        }, "线程一");
-        Thread t2 = new Thread(() -> {
-            doWithLock("lock2");
-        }, "线程二");
+        Thread t1 = new Thread(() -> doWithLock("lock1"), "线程一");
+        Thread t2 = new Thread(() -> doWithLock("lock2"), "线程二");
 
-        Thread t3 = new Thread(() -> {
-            doWithMultiLock();
-        }, "综合线程三");
+        Thread t3 = new Thread(() -> doWithMultiLock(), "综合线程三");
 
         t1.start();
         t2.start();

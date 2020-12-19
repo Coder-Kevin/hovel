@@ -22,12 +22,8 @@ public class ZkLockDemo {
         client.start();
         log.info("zk state is {}, zk client start successfully!", client.getState());
 
-        Thread t1 = new Thread(() -> {
-            doWithLock(client);
-        }, "线程一");
-        Thread t2 = new Thread(() -> {
-            doWithLock(client);
-        }, "线程二");
+        Thread t1 = new Thread(() -> doWithLock(client), "线程一");
+        Thread t2 = new Thread(() -> doWithLock(client), "线程二");
 
         t1.start();
         t2.start();

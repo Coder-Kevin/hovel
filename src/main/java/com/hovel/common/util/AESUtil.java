@@ -24,8 +24,7 @@ public class AESUtil {
         Security.addProvider(new BouncyCastleProvider());
         Cipher cipher = Cipher.getInstance(ALGORITHM, "BC");
         cipher.init(Cipher.ENCRYPT_MODE, keySpec, new IvParameterSpec(iv));
-        byte[] encData = cipher.doFinal(srcData);
-        return encData;
+        return cipher.doFinal(srcData);
     }
 
     //解密

@@ -56,7 +56,7 @@ public class RedisDemo {
     public void keys() {
         Set<String> keys = jedis.keys("my*");
         if (keys != null && !keys.isEmpty()) {
-            keys.forEach(key -> log.info(key));
+            keys.forEach(log::info);
         }
     }
 
@@ -118,12 +118,11 @@ public class RedisDemo {
         List<Object> execResult = transaction.exec();
 
         if (execResult == null || execResult.isEmpty()) {
-            log.info(jedis.get("mu"));
             // 乐观锁
         } else {
             log.info(Arrays.toString(execResult.toArray()));
-            log.info(jedis.get("mu"));
         }
+        log.info(jedis.get("mu"));
         anotherJedis.close();
     }
 

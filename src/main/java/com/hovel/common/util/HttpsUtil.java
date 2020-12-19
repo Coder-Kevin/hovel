@@ -1,6 +1,7 @@
 package com.hovel.common.util;
 
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
@@ -76,7 +77,7 @@ public class HttpsUtil {
      * @throws Exception
      */
     public static Response doPostRequestFile(String url, Map<String, String> paramMap, Map<String, File> fileMap) throws Exception {
-        if (null == url || url.isEmpty()) {
+        if (StringUtils.isEmpty(url)) {
             throw new Exception("The request URL is blank.");
         }
 
@@ -85,7 +86,6 @@ public class HttpsUtil {
             getTrust();
         }
         Connection connection = Jsoup.connect(url);
-        //Connection connection = Jsoup.connect(url).url(new URL(null, url, new sun.net.www.protocol.https.Handler()));//可用
         connection.method(Connection.Method.POST);
         connection.timeout(TIME_OUT);
         connection.header("Content-Type", "multipart/form-data");
@@ -135,7 +135,7 @@ public class HttpsUtil {
      * @throws Exception
      */
     public static Response doPostRequest(String url, Map<String, String> paramMap, Map<String, String> headers) throws Exception {
-        if (null == url || url.isEmpty()) {
+        if (StringUtils.isEmpty(url)) {
             throw new Exception("The request URL is blank.");
         }
 
@@ -144,7 +144,6 @@ public class HttpsUtil {
             getTrust();
         }
         Connection connection = Jsoup.connect(url);
-        //Connection connection = Jsoup.connect(url).url(new URL(null, url, new sun.net.www.protocol.https.Handler()));//可用
         connection.method(Connection.Method.POST);
         connection.timeout(TIME_OUT);
         connection.header("Content-Type", "application/json;charset=UTF-8");

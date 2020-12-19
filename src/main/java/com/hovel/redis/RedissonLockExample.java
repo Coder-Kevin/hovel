@@ -35,12 +35,8 @@ public class RedissonLockExample {
         log.info("redis client start.....");
 
 
-        Thread t1 = new Thread(() -> {
-            doWithLock();
-        }, "线程一");
-        Thread t2 = new Thread(() -> {
-            doWithLock();
-        }, "线程二");
+        Thread t1 = new Thread(() -> doWithLock(), "线程一");
+        Thread t2 = new Thread(() -> doWithLock(), "线程二");
 
         t1.start();
         t2.start();

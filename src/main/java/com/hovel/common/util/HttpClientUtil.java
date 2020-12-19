@@ -1,8 +1,5 @@
 package com.hovel.common.util;
 
-import cn.hutool.http.HttpUtil;
-import jodd.http.HttpRequest;
-import org.apache.commons.lang.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -12,7 +9,6 @@ import org.apache.http.impl.nio.client.HttpAsyncClients;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -30,7 +26,7 @@ public class HttpClientUtil {
             Future<HttpResponse> future = httpclient.execute(request, null);
             HttpResponse response = future.get();
             response.getEntity().getContentLength();
-            OutputStream outputStream = new ByteArrayOutputStream();
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             HttpEntity entity = response.getEntity();
             entity.writeTo(outputStream);
 
@@ -42,12 +38,8 @@ public class HttpClientUtil {
                 System.out.println(header.getName() + "---" + header.getValue());
             }
 
-            return new String(((ByteArrayOutputStream) outputStream).toByteArray());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            return outputStream.toString();
+        } catch (InterruptedException | ExecutionException | IOException e) {
             e.printStackTrace();
         } finally {
             try {

@@ -2,7 +2,6 @@ package com.hovel.redis;
 
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
-import org.redisson.RedissonRedLock;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
@@ -34,12 +33,8 @@ public class RedissonRedLockExample {
         log.info("redis client start.....");
 
 
-        Thread t1 = new Thread(() -> {
-            doWithLock();
-        }, "线程一");
-        Thread t2 = new Thread(() -> {
-            doWithLock();
-        }, "线程二");
+        Thread t1 = new Thread(() -> doWithLock(), "线程一");
+        Thread t2 = new Thread(() -> doWithLock(), "线程二");
 
         t1.start();
         t2.start();

@@ -23,7 +23,6 @@ public class ElementalPoolingHttpGet {
                 .add(new RequestContent())
                 .add(new RequestTargetHost())
                 .add(new RequestConnControl())
-//                .add(new RequestUserAgent("Test/1.1"))
                 .add(new RequestExpectContinue(true)).build();
 
         final HttpRequestExecutor httpexecutor = new HttpRequestExecutor();
@@ -37,7 +36,6 @@ public class ElementalPoolingHttpGet {
                 new HttpHost("localhost", 8099),
                 new HttpHost("localhost", 8099),
                 new HttpHost("localhost", 8099)
-//                new HttpHost("http://localhost", 8099)
         };
 
         class WorkerThread extends Thread {
@@ -73,9 +71,7 @@ public class ElementalPoolingHttpGet {
                         System.out.println(EntityUtils.toString(response.getEntity()));
 
                         reusable = connStrategy.keepAlive(response, coreContext);
-                    } catch (IOException ex) {
-                        throw ex;
-                    } catch (HttpException ex) {
+                    } catch (IOException | HttpException ex) {
                         throw ex;
                     } finally {
                         if (reusable) {
@@ -89,17 +85,16 @@ public class ElementalPoolingHttpGet {
             }
 
         }
-        ;
 
         WorkerThread[] workers = new WorkerThread[targets.length];
-        for (int i = 0; i < workers.length; i++) {
+        for (int i = workers.length - 1; i >= 0; i--) {
             workers[i] = new WorkerThread(targets[i]);
         }
-        for (int i = 0; i < workers.length; i++) {
-            workers[i].start();
+        for (WorkerThread workerThread : workers) {
+            workerThread.start();
         }
-        for (int i = 0; i < workers.length; i++) {
-            workers[i].join();
+        for (WorkerThread worker : workers) {
+            worker.join();
         }
     }
 

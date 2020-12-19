@@ -18,8 +18,7 @@ import java.util.concurrent.Future;
 public class ZeroCopyHttpExchange {
 
     public static void main(final String[] args) throws Exception {
-        CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault();
-        try {
+        try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault()) {
             httpclient.start();
             File upload = new File(args[0]);
             File download = new File(args[1]);
@@ -43,8 +42,6 @@ public class ZeroCopyHttpExchange {
             File result = future.get();
             System.out.println("Response file length: " + result.length());
             System.out.println("Shutting down");
-        } finally {
-            httpclient.close();
         }
         System.out.println("Done");
     }

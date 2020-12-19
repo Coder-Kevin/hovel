@@ -8,6 +8,7 @@ import com.hovel.common.util.tls.HttpsUrlConnectionForTLS;
 import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Jdk7HttpsTest {
 
@@ -30,12 +31,13 @@ public class Jdk7HttpsTest {
         String x_bigtree_nonce = CryptUtils.makeRandomStr(16);
 
         //AES加密(去掉空格和换行)
-        String aesJsonStr = CryptUtils.encrypt(newparams, ACCESS_KEY, x_bigtree_nonce).replaceAll(REPLACE_STR, "");
+        String aesJsonStr;
+        aesJsonStr = Objects.requireNonNull(CryptUtils.encrypt(newparams, ACCESS_KEY, x_bigtree_nonce)).replaceAll(REPLACE_STR, "");
         //签名规则
         String signRule = ACCESS_KEY + aesJsonStr + APPID + x_bigtree_nonce;
         //MD5签名(去掉空格和换行)
         String sign = CryptUtils.md5(signRule.replaceAll(REPLACE_STR, ""));
-        Map<String, String> param = new HashMap<String, String>();
+        Map<String, String> param = new HashMap<>();
         param.put("data", URLEncoder.encode(aesJsonStr, "UTF-8"));
         System.out.println("nonce:" + x_bigtree_nonce + ",sign:" + sign);
         System.out.println("sign:" + sign);
@@ -44,12 +46,11 @@ public class Jdk7HttpsTest {
 
 
         // post请求是将参数放在请求体里面传过去的;这里将entity放入post请求体中
-        Map<String, String> headers = new HashMap<String, String>();
+        Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json;charset=utf8");
         headers.put("x-bigtree-appid", APPID);
         headers.put("x-bigtree-nonce", x_bigtree_nonce);
         headers.put("x-bigtree-sign", sign);
-        headers.put("Content-Type", "application/json;charset=utf-8");
 
         HttpsUrlConnectionForTLS.doPost(apiUrl, JSON.toJSONString(param), headers);
     }

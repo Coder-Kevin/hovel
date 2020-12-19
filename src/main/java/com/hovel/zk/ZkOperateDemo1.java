@@ -59,9 +59,5 @@ public class ZkOperateDemo1 {
         client.close();
     }
 
-    /**
-     * zk Watcher
-     */
-
 
 }

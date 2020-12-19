@@ -14,13 +14,14 @@ public class FileDownload {
         String fileUrl = "https://wx.sandbox1.wanbochain.com/wx/attachment/ac5c0c88-b5c1-4946-b5eb-6780568c4b51";
 
         String s = HttpClientUtil.get(fileUrl);
+        assert s != null;
         System.out.println(s.length());
 
         byte[] bytes = HttpUtil.downloadBytes(fileUrl);
         System.out.println(bytes.length);
 
 
-        HttpResponse response = null;
+        HttpResponse response;
         try {
             response = HttpRequest.get(fileUrl).send();
             if (response.statusCode() != 200) {
@@ -41,14 +42,7 @@ public class FileDownload {
                     fileName = fileName.substring(0, fileName.indexOf("?"));
                 }
             }
-
-            String s1 = response.mediaType();
-            String s2 = response.contentType();
-
-            System.out.println("----");
-
-
-        } catch (RuntimeException e) {
+         } catch (RuntimeException e) {
             e.printStackTrace();
         }
     }

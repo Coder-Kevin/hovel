@@ -1,5 +1,6 @@
 package com.hovel.http;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.*;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.ContentType;
@@ -14,26 +15,25 @@ import org.apache.http.util.EntityUtils;
 import java.io.ByteArrayInputStream;
 import java.net.Socket;
 
+@Slf4j
 public class ElementalHttpPost {
 
     public static void main(String[] args) throws Exception {
-        HttpProcessor httpproc = HttpProcessorBuilder.create()
+        HttpProcessor httpProc = HttpProcessorBuilder.create()
                 .add(new RequestContent())
                 .add(new RequestTargetHost())
                 .add(new RequestConnControl())
                 .add(new RequestUserAgent("Test/1.1"))
                 .add(new RequestExpectContinue(true)).build();
 
-        HttpRequestExecutor httpexecutor = new HttpRequestExecutor();
+        HttpRequestExecutor httpExecutor = new HttpRequestExecutor();
 
         HttpCoreContext coreContext = HttpCoreContext.create();
         HttpHost host = new HttpHost("localhost", 8080);
         coreContext.setTargetHost(host);
 
-        DefaultBHttpClientConnection conn = new DefaultBHttpClientConnection(8 * 1024);
-        ConnectionReuseStrategy connStrategy = DefaultConnectionReuseStrategy.INSTANCE;
-
-        try {
+        try (DefaultBHttpClientConnection conn = new DefaultBHttpClientConnection(8 * 1024)) {
+            ConnectionReuseStrategy connStrategy = DefaultConnectionReuseStrategy.INSTANCE;
 
             HttpEntity[] requestBodies = {
                     new StringEntity(
@@ -49,31 +49,29 @@ public class ElementalHttpPost {
                             ContentType.APPLICATION_OCTET_STREAM)
             };
 
-            for (int i = 0; i < requestBodies.length; i++) {
+            for (HttpEntity requestBody : requestBodies) {
                 if (!conn.isOpen()) {
                     Socket socket = new Socket(host.getHostName(), host.getPort());
                     conn.bind(socket);
                 }
                 BasicHttpEntityEnclosingRequest request = new BasicHttpEntityEnclosingRequest("POST",
                         "/servlets-examples/servlet/RequestInfoExample");
-                request.setEntity(requestBodies[i]);
-                System.out.println(">> Request URI: " + request.getRequestLine().getUri());
+                request.setEntity(requestBody);
+                log.info(">> Request URI: " + request.getRequestLine().getUri());
 
-                httpexecutor.preProcess(request, httpproc, coreContext);
-                HttpResponse response = httpexecutor.execute(request, conn, coreContext);
-                httpexecutor.postProcess(response, httpproc, coreContext);
+                httpExecutor.preProcess(request, httpProc, coreContext);
+                HttpResponse response = httpExecutor.execute(request, conn, coreContext);
+                httpExecutor.postProcess(response, httpProc, coreContext);
 
-                System.out.println("<< Response: " + response.getStatusLine());
-                System.out.println(EntityUtils.toString(response.getEntity()));
-                System.out.println("==============");
+                log.info("<< Response: " + response.getStatusLine());
+                log.info(EntityUtils.toString(response.getEntity()));
+                log.info("==============");
                 if (!connStrategy.keepAlive(response, coreContext)) {
                     conn.close();
                 } else {
-                    System.out.println("Connection kept alive...");
+                    log.info("Connection kept alive...");
                 }
             }
-        } finally {
-            conn.close();
         }
     }
 
